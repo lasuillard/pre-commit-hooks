@@ -1,0 +1,7 @@
+- id: check-directory-structure
+  name: Check Directory Structure
+  description: Check matching test file exists.
+  entry: check-directory-structure
+  language: python
+  pass_filenames: false
+  types: [python]

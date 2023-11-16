@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: workspace
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      CONTAINER: 1
+    command: sleep infinity
+    init: true
