@@ -1,5 +1,12 @@
-def main():
+import sys
+
+
+def main() -> int:
+    """Hook entry."""
     print("Hello, World!")
 
+    return 0
+
+
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
