@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 # List of glob patterns to exclude from check
 filters = [
-    "__init__.py",
+    "**/__init__.py",
 ]
 
 
@@ -23,7 +23,9 @@ def check_directory_structure(*, source: Path, target: Path) -> int:  # noqa: D1
 
     # NOTE: `Path.walk` available since 3.12
     for file in py_files:
-        mirror = target.joinpath(file.relative_to(source)).with_stem(f"test_{file.stem}")
+        mirror = target.joinpath(file.relative_to(source)).with_stem(
+            f"test_{file.stem}",
+        )
         if not mirror.exists():
             logger.warning(
                 "Expecting %s to exist for %s but not exists",
