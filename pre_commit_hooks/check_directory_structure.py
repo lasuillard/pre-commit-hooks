@@ -2,7 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
-from src.util.parser import ArgumentParser
+from pre_commit_hooks.util.parser import ArgumentParser
 
 logger = logging.getLogger(__name__)
 

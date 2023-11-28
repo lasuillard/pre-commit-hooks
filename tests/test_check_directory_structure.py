@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.check_directory_structure import check_directory_structure
+from pre_commit_hooks.check_directory_structure import check_directory_structure
 
 
 def test_empty_dir(temp_git_dir: Path) -> None:

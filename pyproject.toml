@@ -8,10 +8,9 @@ description = "pre-commit hooks for personal use."
 version = "0.1.0"
 authors = ["Yuchan Lee <lasuillard@gmail.com>"]
 classifiers = ["Private :: Do not Upload"]
-packages = [{ include = "src" }]
 
 [tool.poetry.scripts]
-check-directory-structure = "src.check_directory_structure:main"
+check-directory-structure = "pre_commit_hooks.check_directory_structure:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
