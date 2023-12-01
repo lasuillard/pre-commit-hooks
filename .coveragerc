@@ -1,6 +1,6 @@
 [run]
 include =
-  src/*
+  pre_commit_hooks/*
 
 omit =
     *tests*
