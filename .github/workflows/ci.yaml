@@ -60,3 +60,16 @@ jobs:
           fail_ci_if_error: false
           files: coverage.xml
           flags: unittests
+
+  release:
+    name: Release
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    if: startswith(github.ref, 'refs/tags/v') # For v* tags
+    permissions:
+      contents: write
+    steps:
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
