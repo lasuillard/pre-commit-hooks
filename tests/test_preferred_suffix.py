@@ -3,12 +3,12 @@ from pathlib import Path
 import pytest
 
 from pre_commit_hooks.preferred_suffix import preferred_suffix
-
-from ._helpers import populate_dir
+from tests._helpers import populate_dir
 
 
 def test_no_paths() -> None:
-    assert preferred_suffix(rename=False) == 0
+    exit_code = preferred_suffix(rename=False)
+    assert exit_code == 0
 
 
 @pytest.mark.parametrize(
