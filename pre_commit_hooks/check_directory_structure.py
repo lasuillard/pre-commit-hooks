@@ -2,6 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
+from pre_commit_hooks.helpers.debugger import input_as_args
 from pre_commit_hooks.util.parser import ArgumentParser
 
 logger = logging.getLogger(__name__)
@@ -65,4 +66,5 @@ def main() -> int:  # noqa: D103
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    with input_as_args():
+        sys.exit(main())
