@@ -1,6 +1,6 @@
 - id: check-directory-structure
-  name: Check Directory Structure
-  description: Check matching test file exists.
+  name: Check directory structure
+  description: Check current directory structure.
   entry: check-directory-structure
   language: python
   pass_filenames: false
