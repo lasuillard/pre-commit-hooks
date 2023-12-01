@@ -3,6 +3,8 @@ import logging
 from pathlib import Path
 from typing import Any
 
+import colorlog
+
 
 class ArgumentParser(argparse.ArgumentParser):  # noqa: D101
     def __init__(self, *args: Any, **kwargs: Any):  # noqa: D107
@@ -31,7 +33,16 @@ class ArgumentParser(argparse.ArgumentParser):  # noqa: D101
 
     def parse_args(self, *args: Any, **kwargs: Any) -> Any:  # noqa: D102
         parsed_args = super().parse_args(*args, **kwargs)
+
+        # Configure logger
+        handler = colorlog.StreamHandler()
+        handler.setFormatter(
+            colorlog.ColoredFormatter(
+                "%(asctime)s %(log_color)s%(levelname)-8s %(reset)s%(module)s %(message)s",
+                datefmt="%Y-%m-%d %H:%M:%S",
+            ),
+        )
         log_level = logging.DEBUG if parsed_args.verbose else logging.INFO
-        log_format = "%(asctime)s %(levelname)s %(message)s"
-        logging.basicConfig(level=log_level, format=log_format)
+        logging.basicConfig(level=log_level, handlers=[handler])
+
         return parsed_args
