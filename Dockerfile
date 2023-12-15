@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bookworm AS workspace
+FROM python:3.8-slim-bookworm AS workspace
 
 USER root:root
 
@@ -33,5 +33,6 @@ RUN git config --system --add safe.directory "${WORKSPACE}"
 
 # Python control variables
 ENV PYTHONUNBUFFERED="1"
+ENV PYTHONPATH="${WORKSPACE}:${PYTHONPATH}"
 
 HEALTHCHECK NONE
