@@ -43,7 +43,6 @@ def main() -> int:  # noqa: D103
         prog="check-directory-structure",
         description="Check current directory structure",
     )
-
     parser.add_argument(
         "--source",
         type=Path,
@@ -58,10 +57,12 @@ def main() -> int:  # noqa: D103
     )
 
     args = parser.parse_args()
+    source: Path = args.source
+    target: Path = args.target
 
     return check_directory_structure(
-        source=args.source,
-        target=args.target,
+        source=source,
+        target=target,
     )
 
 

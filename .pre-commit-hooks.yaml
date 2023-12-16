@@ -5,3 +5,11 @@
   language: python
   pass_filenames: false
   types: [python]
+
+- id: preferred-suffix
+  name: Check filename has preferred suffix
+  description: Check filenames to use single preferred suffix over other possible variants.
+  entry: preferred-suffix
+  language: python
+  pass_filenames: true
+  types: [file]
