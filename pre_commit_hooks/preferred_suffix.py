@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 import sys
 from collections.abc import Mapping, Sequence
@@ -31,7 +33,7 @@ def preferred_suffix(*files: Path, rename: bool) -> int:  # noqa: D103
                             suffix,
                             preferred,
                         )
-                        file_renamed = file.with_name(file.name.removesuffix(suffix) + preferred)
+                        file_renamed = file.with_name(file.name[: file.name.rfind(suffix)] + preferred)
                         file.rename(file_renamed)
                         logger.warning("Renamed file %r to %r because `rename` option is set.", file, file_renamed)
                     else:
