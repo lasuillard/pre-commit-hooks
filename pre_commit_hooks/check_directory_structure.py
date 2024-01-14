@@ -1,25 +1,29 @@
+from __future__ import annotations
+
 import logging
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from pre_commit_hooks.helpers.debugger import input_as_args
 from pre_commit_hooks.util.parser import ArgumentParser
 
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
 logger = logging.getLogger(__name__)
 
-# TODO(lasuillard): Regex support
-# TODO(lasuillard): Customizable options to support languages other than Python
-
 # List of glob patterns to exclude from check
-filters = [
+_exclude_base = [
     "**/__init__.py",
 ]
 
 
-def check_directory_structure(*, source: Path, target: Path) -> int:  # noqa: D103
+def check_directory_structure(*, source: Path, target: Path, extend_exclude: Iterable[str]) -> int:  # noqa: D103
     exit_code = 0
     py_files = set(source.glob("**/*.py"))
-    for f in filters:
+    exclude = _exclude_base + list(extend_exclude)
+    for f in exclude:
         py_files -= set(source.glob(f))
 
     # NOTE: `Path.walk` available since 3.12
@@ -55,14 +59,22 @@ def main() -> int:  # noqa: D103
         default=Path.cwd() / "tests",
         help="Target directory",
     )
+    parser.add_argument(
+        "--extend-exclude",
+        type=str,
+        nargs="*",
+        help="Additional glob patterns to exclude from check",
+    )
 
     args = parser.parse_args()
     source: Path = args.source
     target: Path = args.target
+    extend_exclude: list[str] = args.extend_exclude
 
     return check_directory_structure(
         source=source,
         target=target,
+        extend_exclude=extend_exclude,
     )
 
 
