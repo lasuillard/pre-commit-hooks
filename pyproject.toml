@@ -31,12 +31,70 @@ pytest-xdist = "^3.5.0"
 ruff = "^0.1.5"
 pre-commit = "^3.5.0"
 
+[tool.ruff]
+target-version = "py38"
+select = ["ALL"]
+ignore = [
+  "FIX",
+  "TD003",
+  "ANN101",
+  "ANN102",
+  "ANN401",
+  "D100",
+  "D105",
+  "D106",
+  "ANN204",
+]
+line-length = 120
+
+[tool.ruff.extend-per-file-ignores]
+"__init__.py" = ["D104"]
+"tests/*" = ["D", "S101", "PLR2004", "SLF001"]
+"scripts/*" = ["INP001", "T201"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
 [tool.black]
-target-version = ["py311"]
+target-version = ["py38"]
 line-length = 120
 include = '\.pyi?$'
-exclude = """
-/(
-  | .venv
-)/
-"""
+
+[tool.mypy]
+python_version = "3.8"
+exclude = ['^\.venv/*']
+namespace_packages = true
+check_untyped_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_return_any = true
+show_error_codes = true
+strict_optional = true
+no_implicit_reexport = true
+
+[tool.pytest.ini_options]
+addopts = [
+  "--numprocesses=auto",
+  "--strict-markers",
+  "--doctest-modules",
+  "--cov",
+  "--cov-report=term",
+  "--cov-report=xml",
+  "--show-capture=no",
+  "--junitxml=report.xml",
+]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning::"]
+
+[tool.coverage.run]
+include = ["pre_commit_hooks/*"]
+omit = ["*tests*"]
+branch = true
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = true
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING"]
