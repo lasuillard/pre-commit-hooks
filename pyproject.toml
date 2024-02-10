@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "pre-commit-hooks"
 description = "pre-commit hooks for personal use."
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Yuchan Lee <lasuillard@gmail.com>"]
 classifiers = ["Private :: Do not Upload"]
 
