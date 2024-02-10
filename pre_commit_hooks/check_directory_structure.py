@@ -63,6 +63,7 @@ def main() -> int:  # noqa: D103
         "--extend-exclude",
         type=str,
         nargs="*",
+        default=[],
         help="Additional glob patterns to exclude from check",
     )
 
