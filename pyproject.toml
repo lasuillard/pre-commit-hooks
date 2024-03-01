@@ -28,7 +28,7 @@ pytest-env = "^1.1.1"
 pytest-sugar = "^0.9.7"
 pytest-timeout = "^2.2.0"
 pytest-xdist = "^3.5.0"
-ruff = "^0.1.5"
+ruff = "^0.3.0"
 
 [tool.ruff]
 target-version = "py38"
