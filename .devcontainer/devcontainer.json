@@ -26,8 +26,5 @@
         "ms-python.debugpy"
       ]
     }
-  },
-  "containerEnv": {
-    "POETRY_VIRTUALENVS_CREATE": "false"
   }
 }
