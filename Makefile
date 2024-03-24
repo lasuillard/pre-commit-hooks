@@ -28,47 +28,33 @@ install:  ## Install the app locally
 .PHONY: install
 
 init:  ## Initialize project repository
-	poetry run pre-commit autoupdate
-	poetry run pre-commit install --install-hooks --hook-type pre-commit --hook-type commit-msg
+	pre-commit autoupdate
+	pre-commit install --install-hooks --hook-type pre-commit --hook-type commit-msg
 .PHONY: init
 
 
 # =============================================================================
 # CI
 # =============================================================================
-ci: lint scan test e2e-test  ## Run CI tasks
+ci: lint scan test  ## Run CI tasks
 .PHONY: ci
 
 format:  ## Run autoformatters
 	poetry run ruff check --fix .
-	poetry run black .
 .PHONY: format
 
 lint:  ## Run all linters
 	poetry run ruff check .
-	poetry run black --check .
 	poetry run mypy --show-error-codes --pretty .
 .PHONY: lint
-
-scan:  ## Run all scans
-	checkov --quiet --directory .
-.PHONY: scan
 
 test:  ## Run tests
 	poetry run pytest
 .PHONY: test
 
-e2e-test:  ## Run e2e tests
-
-.PHONY: e2e-test
-
 build:  ## Build application
-	poetry run python scripts/build_app.py
+	poetry build
 .PHONY: build
-
-docs:  ## Generate dev documents
-
-.PHONY: docs
 
 
 # =============================================================================

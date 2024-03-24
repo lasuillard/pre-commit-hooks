@@ -2,21 +2,12 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - v*
-    paths-ignore:
-      - ".devcontainer/**"
-      - ".vscode/**"
-      - "**.md"
+    branches: [main]
+    tags: [v*]
+
   pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - ".devcontainer/**"
-      - ".vscode/**"
-      - "**.md"
+    branches: [main]
+
   workflow_dispatch:
 
 permissions: read-all
@@ -41,22 +32,13 @@ jobs:
       - name: Install pip deps
         run: poetry install
 
-      - name: Check code formatting
-        run: poetry run black --check .
-
-      - name: Lint code
-        run: poetry run ruff check .
-
-      - name: Run type checks
-        run: poetry run mypy --show-error-codes --pretty .
-
-      - name: Run tests
-        run: poetry run pytest
+      - uses: pre-commit/action@v3.0.1
+      - uses: pre-commit-ci/lite-action@v1.0.2
+        if: always()
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
+          fail_ci_if_error: true
           files: coverage.xml
-          flags: unittests
