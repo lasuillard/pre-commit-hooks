@@ -7,7 +7,8 @@ repos:
         name: Fix using Ruff
         language: system
         types: [python]
-        entry: poetry run ruff
+        entry: poetry run ruff check
+        args: [--fix]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0

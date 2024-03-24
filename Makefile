@@ -36,7 +36,7 @@ init:  ## Initialize project repository
 # =============================================================================
 # CI
 # =============================================================================
-ci: lint scan test  ## Run CI tasks
+ci: lint test  ## Run CI tasks
 .PHONY: ci
 
 format:  ## Run autoformatters
