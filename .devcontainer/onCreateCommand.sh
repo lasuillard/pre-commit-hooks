@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get update && apt-get install -y bash-completion
+sudo apt-get update && sudo apt-get install -y bash-completion
 
 echo '
 if [ -f /etc/bash_completion ]; then
