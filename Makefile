@@ -29,7 +29,7 @@ install:  ## Install the app locally
 
 init:  ## Initialize project repository
 	pre-commit autoupdate
-	pre-commit install --install-hooks --hook-type pre-commit --hook-type commit-msg
+	pre-commit install --install-hooks --hook-type pre-commit
 .PHONY: init
 
 
