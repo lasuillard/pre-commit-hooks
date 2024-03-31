@@ -25,12 +25,13 @@ help: Makefile  ## Show help
 # =============================================================================
 install:  ## Install the app locally
 	poetry install
+	pre-commit install --install-hooks
 .PHONY: install
 
-init:  ## Initialize project repository
+update:  ## Update deps and tools
+	poetry update
 	pre-commit autoupdate
-	pre-commit install --install-hooks --hook-type pre-commit
-.PHONY: init
+.PHONY: update
 
 
 # =============================================================================
