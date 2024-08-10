@@ -74,6 +74,6 @@ def main() -> int:  # noqa: D103
     return preferred_suffix(*files, rename=rename)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     with input_as_args():
         sys.exit(main())
