@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import logging
 import sys
-from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import cast
+from typing import Mapping, Sequence, cast
 
 from pre_commit_hooks.helpers.debugger import input_as_args
 from pre_commit_hooks.util.parser import ArgumentParser

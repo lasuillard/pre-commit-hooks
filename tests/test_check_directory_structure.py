@@ -1,19 +1,30 @@
+import sys
 from pathlib import Path
+from unittest.mock import patch
 
-from pre_commit_hooks.check_directory_structure import check_directory_structure
+from pre_commit_hooks.check_directory_structure import main
 from tests._helpers import populate_dir
 
 
 def test_empty_dir(temp_git_dir: Path) -> None:
-    exit_code = check_directory_structure(
-        source=temp_git_dir / "src",
-        target=temp_git_dir / "tests",
-        extend_exclude=[],
-    )
+    with patch.object(
+        sys,
+        "argv",
+        [
+            "check-directory-structure",
+            "--source",
+            str(temp_git_dir / "src"),
+            "--target",
+            str(temp_git_dir / "tests"),
+        ],
+    ):
+        exit_code = main()
+
     assert exit_code == 0
 
 
 def test_only_src_dir_populated(temp_git_dir: Path) -> None:
+    # Arrange
     populate_dir(
         temp_git_dir,
         file_or_dirs=[
@@ -23,15 +34,27 @@ def test_only_src_dir_populated(temp_git_dir: Path) -> None:
             "src/util/telemetry/traces.py",
         ],
     )
-    exit_code = check_directory_structure(
-        source=temp_git_dir / "src",
-        target=temp_git_dir / "tests",
-        extend_exclude=[],
-    )
+
+    # Act
+    with patch.object(
+        sys,
+        "argv",
+        [
+            "check-directory-structure",
+            "--source",
+            str(temp_git_dir / "src"),
+            "--target",
+            str(temp_git_dir / "tests"),
+        ],
+    ):
+        exit_code = main()
+
+    # Assert
     assert exit_code == 1
 
 
 def test_dir_fully_populated(temp_git_dir: Path) -> None:
+    # Arrange
     populate_dir(
         temp_git_dir,
         file_or_dirs=[
@@ -46,9 +69,22 @@ def test_dir_fully_populated(temp_git_dir: Path) -> None:
             "tests/util/telemetry/test_traces.py",
         ],
     )
-    exit_code = check_directory_structure(
-        source=temp_git_dir / "src",
-        target=temp_git_dir / "tests",
-        extend_exclude=["**/migrations/*.py"],
-    )
+
+    # Act
+    with patch.object(
+        sys,
+        "argv",
+        [
+            "check-directory-structure",
+            "--source",
+            str(temp_git_dir / "src"),
+            "--target",
+            str(temp_git_dir / "tests"),
+            "--extend-exclude",
+            "**/migrations/*.py",
+        ],
+    ):
+        exit_code = main()
+
+    # Assert
     assert exit_code == 0
