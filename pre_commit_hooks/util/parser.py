@@ -17,7 +17,7 @@ class ArgumentParser(argparse.ArgumentParser):  # noqa: D101
             action="store_true",
         )
 
-    def add_argument(self, *args: Any, **kwargs: Any) -> argparse.Action:  # noqa: D102
+    def add_argument(self, *args: Any, **kwargs: Any) -> argparse.Action:  # noqa: D102 # pragma: no cover
         # Auto add default to help
         if "default" in kwargs and "help" in kwargs and "--help" not in args:
             help_ = kwargs["help"]
