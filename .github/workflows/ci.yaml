@@ -32,6 +32,13 @@ jobs:
       - uses: pre-commit-ci/lite-action@v1.0.2
         if: always()
 
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          files: report.xml
+
       - name: Upload coverage report
         uses: codecov/codecov-action@v4
         with:
