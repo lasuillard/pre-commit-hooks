@@ -13,3 +13,11 @@
   language: python
   pass_filenames: true
   types: [file]
+
+- id: alloy-format
+  name: Format `.alloy` files
+  description: Format `.alloy` files using `alloy fmt`. `alloy` must be installed.
+  language: system
+  files: \.alloy$
+  entry: alloy fmt
+  args: [--write]
