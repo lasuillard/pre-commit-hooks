@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 # https://github.com/pre-commit/pre-commit-hooks/blob/main/tests/conftest.py
-@pytest.fixture()
+@pytest.fixture
 def temp_git_dir(tmpdir: LocalPath) -> Path:
     git_dir = Path(tmpdir) / "git"
     subprocess.Popen(["git", "init", "--", str(git_dir)])  # noqa: S603, S607

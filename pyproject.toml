@@ -27,10 +27,13 @@ pytest-env = "^1.1.1"
 pytest-sugar = "^1.0.0"
 pytest-timeout = "^2.2.0"
 pytest-xdist = "^3.6.1"
-ruff = "^0.5.0"
+ruff = "^0.6.3"
 
 [tool.ruff]
 target-version = "py38"
+line-length = 120
+
+[tool.ruff.lint]
 select = ["ALL"]
 ignore = [
   "FIX",
@@ -43,14 +46,13 @@ ignore = [
   "D106",
   "ANN204",
 ]
-line-length = 120
 
-[tool.ruff.extend-per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "__init__.py" = ["D104"]
 "tests/*" = ["D", "S101", "PLR2004", "SLF001"]
 "scripts/*" = ["INP001", "T201"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.mypy]
