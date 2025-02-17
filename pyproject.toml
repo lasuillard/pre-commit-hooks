@@ -14,7 +14,7 @@ check-directory-structure = "pre_commit_hooks.check_directory_structure:main"
 preferred-suffix = "pre_commit_hooks.preferred_suffix:main"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0"
+python = ">=3.9,<4.0"
 colorlog = "^6.9.0"
 
 [tool.poetry.group.dev.dependencies]

@@ -1,12 +1,12 @@
 {
   "name": "lasuillard/pre-commit-hooks",
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.8-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.9-bookworm",
   "features": {
     "ghcr.io/devcontainers-contrib/features/poetry:2": {},
     "ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
   },
   "onCreateCommand": "./.devcontainer/onCreateCommand.sh",
-	"postAttachCommand": "pre-commit install",
+  "postAttachCommand": "pre-commit install",
   "customizations": {
     "vscode": {
       "extensions": [
