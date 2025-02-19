@@ -4,8 +4,6 @@ MAKEFLAGS += --warn-undefined-variable
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 
--include Makefile.*
-
 SHELL := bash
 .ONESHELL:
 .SHELLFLAGS := -eu -o pipefail -c
@@ -13,23 +11,20 @@ SHELL := bash
 .DEFAULT_GOAL := help
 
 help: Makefile  ## Show help
-	for makefile in $(MAKEFILE_LIST)
-	do
-		@echo "$${makefile}"
-		@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' "$${makefile}" | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
-	done
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 
 # =============================================================================
 # Common
 # =============================================================================
 install:  ## Install the app locally
-	poetry install
+	uv python install
+	uv sync --frozen --all-extras
 	pre-commit install --install-hooks
 .PHONY: install
 
 update:  ## Update deps and tools
-	poetry update
+	uv sync --upgrade --all-extras
 	pre-commit autoupdate
 .PHONY: update
 
@@ -41,21 +36,21 @@ ci: lint test  ## Run CI tasks
 .PHONY: ci
 
 format:  ## Run autoformatters
-	poetry run ruff check --fix .
-	poetry run ruff format .
+	uv run ruff check --fix .
+	uv run ruff format .
 .PHONY: format
 
 lint:  ## Run all linters
-	poetry run ruff check .
-	poetry run mypy --show-error-codes --pretty .
+	uv run ruff check .
+	uv run mypy --show-error-codes --pretty .
 .PHONY: lint
 
 test:  ## Run tests
-	poetry run pytest
+	uv run pytest
 .PHONY: test
 
 build:  ## Build application
-	poetry build
+	uv build
 .PHONY: build
 
 
