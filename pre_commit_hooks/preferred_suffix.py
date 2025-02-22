@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Mapping, Sequence, cast
 
 from pre_commit_hooks.helpers.debugger import input_as_args
-from pre_commit_hooks.util.parser import ArgumentParser
+from pre_commit_hooks.util.parser_ import ArgumentParser
 
 logger = logging.getLogger(__name__)
 
