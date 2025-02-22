@@ -141,7 +141,7 @@ def main(  # noqa: PLR0913
     raise typer.Exit(exit_code.value)
 
 
-def entrypoint() -> None:  # noqa: D103
+def entrypoint() -> None:  # noqa: D103  # pragma: no cover
     app()
 
 
