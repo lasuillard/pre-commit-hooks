@@ -108,7 +108,7 @@ def _print_mapping(mapping: dict[str, str]) -> None:
     print(table)
 
 
-def entrypoint() -> None:  # noqa: D103
+def entrypoint() -> None:  # noqa: D103  # pragma: no cover
     app()
 
 

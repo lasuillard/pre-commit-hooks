@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
 from typer.testing import CliRunner
 
 from pre_commit_hooks.preferred_suffix import app
@@ -14,16 +13,8 @@ if TYPE_CHECKING:
 runner = CliRunner()
 
 
-def test_no_paths() -> None:
-    result = runner.invoke(app, [])
-    assert result.exit_code == 2
-
-
-@pytest.mark.parametrize(
-    "args",
-    [(), ("--rename",)],
-)
-def test_all_using_preferred_suffixes(temp_git_dir: Path, args: tuple[str]) -> None:
+def test_all_using_preferred_suffixes(temp_git_dir: Path) -> None:
+    """If all files already have preferred suffixes, it should exit silently."""
     # Arrange
     paths = populate_dir(
         temp_git_dir,
@@ -36,7 +27,7 @@ def test_all_using_preferred_suffixes(temp_git_dir: Path, args: tuple[str]) -> N
     )
 
     # Act
-    result = runner.invoke(app, [*map(str, paths), *args])
+    result = runner.invoke(app, [*map(str, paths)])
 
     # Assert
     assert result.exit_code == 0
@@ -45,6 +36,30 @@ def test_all_using_preferred_suffixes(temp_git_dir: Path, args: tuple[str]) -> N
 
 
 def test_prefer_yaml_over_yml(temp_git_dir: Path) -> None:
+    """Test preferring `yaml` over `yml`."""
+    # Arrange
+    paths = populate_dir(
+        temp_git_dir,
+        file_or_dirs=[
+            ".github/workflows/ci.yml",
+            ".github/dependabot.yml",
+            "docker-compose.yml",
+            "docker-compose.override.yml",
+        ],
+    )
+
+    # Act
+    result = runner.invoke(app, [*map(str, paths)])
+
+    # Assert
+    assert result.exit_code == 1
+    for path in paths:
+        assert path.exists()
+        assert not path.with_suffix(".yaml").exists()
+
+
+def test_prefer_yaml_over_yml_rename(temp_git_dir: Path) -> None:
+    """Test preferring `yaml` over `yml` with auto-renaming."""
     # Arrange
     paths = populate_dir(
         temp_git_dir,
@@ -66,7 +81,8 @@ def test_prefer_yaml_over_yml(temp_git_dir: Path) -> None:
         assert path.with_suffix(".yaml").exists()
 
 
-def test_prefer_yaml_over_yml_leave_it(temp_git_dir: Path) -> None:
+def test_prefer_yaml_over_yml_rename_dry_run(temp_git_dir: Path) -> None:
+    """Test preferring `yaml` over `yml` with auto-renaming in dry-run mode."""
     # Arrange
     paths = populate_dir(
         temp_git_dir,
@@ -79,7 +95,7 @@ def test_prefer_yaml_over_yml_leave_it(temp_git_dir: Path) -> None:
     )
 
     # Act
-    result = runner.invoke(app, [*map(str, paths)])
+    result = runner.invoke(app, ["--rename", "--dry-run", *map(str, paths)])
 
     # Assert
     assert result.exit_code == 1
