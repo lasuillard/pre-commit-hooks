@@ -19,7 +19,7 @@ _exclude_base = [
 ]
 
 
-class Transform(Protocol):  # noqa: D101
+class Transform(Protocol):  # noqa: D101 # pragma: no cover
     def __call__(self, file: Path, *, source: Path, target: Path) -> str: ...  # noqa: D102
 
 
@@ -110,8 +110,8 @@ def main() -> int:  # noqa: D103
     create_if_not_exists: bool = args.create_if_not_exists
 
     if format_ and eval_:
-        msg = "Cannot use `--format` and `--eval` together"
-        raise ValueError(msg)
+        logger.warning("Cannot use `--format` and `--eval` together")
+        return 1
 
     if format_:
 
@@ -130,8 +130,8 @@ def main() -> int:  # noqa: D103
             return str(result)
 
     else:
-        msg = "Either `--format` or `--eval` must be provided"
-        raise ValueError(msg)
+        logger.warning("Either `--format` or `--eval` must be provided")
+        return 1
 
     return check_directory_structure(
         source=source,
