@@ -1,78 +1,88 @@
+# flake8: noqa: B008
 from __future__ import annotations
 
-import logging
-import sys
-from pathlib import Path
-from typing import Mapping, Sequence, cast
+from enum import Enum
+from pathlib import Path  # noqa: TC003
+from typing import TYPE_CHECKING, NoReturn
+
+import typer
+from rich import print  # noqa: A004
 
 from pre_commit_hooks.helpers.debugger import input_as_args
-from pre_commit_hooks.util.parser_ import ArgumentParser
 
-logger = logging.getLogger(__name__)
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
-# TODO(lasuillard): Find possible references of filenames from other files
+app = typer.Typer()
 
-suffixes_to_preferred: Mapping[Sequence[str], str] = {
-    (".yml",): ".yaml",
+
+class ExitCode(Enum):  # noqa: D101
+    Ok = 0
+    Error = 1
+
+
+suffixes_to_preferred: Mapping[str, str] = {
+    ".yml": ".yaml",
 }
 
 
-def preferred_suffix(*files: Path, rename: bool) -> int:  # noqa: D103
-    exit_code = 0
+def preferred_suffix(*files: Path, rename: bool, dry_run: bool) -> ExitCode:  # noqa: D103
+    violations: list[Path] = []
     for file in files:
-        logger.debug("Checking %r", file)
-        for suffixes, preferred in suffixes_to_preferred.items():
-            for suffix in suffixes:
-                if file.name.endswith(suffix):
-                    exit_code = 1
-                    if rename:
-                        logger.warning(
-                            "File %r has suffix %r where preferred suffix is %r.",
-                            file,
-                            suffix,
-                            preferred,
-                        )
-                        file_renamed = file.with_name(file.name[: file.name.rfind(suffix)] + preferred)
-                        file.rename(file_renamed)
-                        logger.warning("Renamed file %r to %r because `rename` option is set.", file, file_renamed)
-                    else:
-                        logger.warning(
-                            "File %r has suffix %r while preferred suffix is %r."
-                            " To rename suffixes automatically, provide `rename` option.",
-                            file,
-                            suffix,
-                            preferred,
-                        )
+        preferred = suffixes_to_preferred.get(file.suffix)
+        if preferred is None:
+            continue
 
-                    # If anything caught, escape abnormally to trigger upper loop escape (`for else` syntax)
-                    break
-            else:
-                continue
-            break
+        print(f"❗ File [yellow]{file!s}[/yellow] has suffix {file.suffix!r} where preferred suffix is {preferred!r}.")
+        violations.append(file)
 
-    return exit_code
+    if violations:
+        print(f"❌ Found {len(violations)} file(s) with non-preferred suffix.")
+        if rename:
+            for file in violations:
+                preferred = suffixes_to_preferred[file.suffix]
+                file_renamed = file.with_suffix(preferred)
+                if not dry_run:
+                    file.rename(file_renamed)
+
+                print(f"⚠️  Renamed file [yellow]{file!s}[/yellow] to [yellow]{file_renamed!s}[/yellow].")
+
+        return ExitCode.Error
+
+    return ExitCode.Ok
 
 
-def main() -> int:  # noqa: D103
-    parser = ArgumentParser(
-        prog="preferred-suffix",
-        description="Check filenames to use single preferred suffix over other possible variants.",
-    )
-    parser.add_argument(
-        "--rename",
-        action="store_true",
+@app.command()
+def main(
+    files: list[Path] = typer.Argument(
+        ...,
+        show_default=False,
+        help="Files to check.",
+    ),
+    *,
+    rename: bool = typer.Option(
+        False,  # noqa: FBT003
         help="Whether to rename files with preferred suffix automatically.",
+    ),
+    dry_run: bool = typer.Option(
+        False,  # noqa: FBT003
+        help="Skip some operations to prevent changes.",
+    ),
+) -> NoReturn:
+    """Check filenames to use single preferred suffix over other possible variants."""
+    exit_code = preferred_suffix(
+        *files,
+        rename=rename,
+        dry_run=dry_run,
     )
-    parser.add_argument("files", type=Path, nargs="+", help="Path of files.")
 
-    # Type annotate args
-    args = parser.parse_args()
-    files: list[Path] = [f.absolute() for f in cast(Sequence[Path], args.files)]
-    rename: bool = args.rename
+    raise typer.Exit(exit_code.value)
 
-    return preferred_suffix(*files, rename=rename)
+
+def entrypoint() -> None:  # noqa: D103
+    app()
 
 
 if __name__ == "__main__":  # pragma: no cover
     with input_as_args():
-        sys.exit(main())
+        entrypoint()

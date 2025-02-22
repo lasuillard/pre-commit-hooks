@@ -5,11 +5,11 @@ version = "0.3.0"
 authors = [{ name = "Yuchan Lee", email = "lasuillard@gmail.com" }]
 license = "MIT"
 requires-python = ">=3.9, <4.0"
-dependencies = ["colorlog~=6.9.0"]
+dependencies = ["typer>=0.15.1"]
 
 [project.scripts]
-check-directory-structure = "pre_commit_hooks.check_directory_structure:main"
-preferred-suffix = "pre_commit_hooks.preferred_suffix:main"
+check-directory-structure = "pre_commit_hooks.check_directory_structure:entrypoint"
+preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
 [project.optional-dependencies]
 dev = ["mypy~=1.14.1", "ruff~=0.9.4"]
@@ -29,12 +29,21 @@ build-backend = "hatchling.build"
 packages = ["pre_commit_hooks"]
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 line-length = 120
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["FIX", "TD003", "ANN401", "D100", "D105", "D106", "ANN204"]
+ignore = [
+  "FIX",
+  "TD003",
+  "ANN401",
+  "D100",
+  "D105",
+  "D106",
+  "ANN204",
+  "UP007",  # Available since Python 3.10
+]
 
 [tool.ruff.lint.extend-per-file-ignores]
 "__init__.py" = ["D104"]
