@@ -57,6 +57,10 @@ def main(
         ["yml -> yaml"],
         help="List of suffix mapping, each in format of `suffix1,suffix2,... -> preferred-suffix`.",
     ),
+    extend_mapping: list[str] = typer.Option(
+        [],
+        help="List of suffix mapping to extend the default mapping.",
+    ),
     rename: bool = typer.Option(
         False,  # noqa: FBT003
         help="Whether to rename files with preferred suffix automatically.",
@@ -67,7 +71,7 @@ def main(
     ),
 ) -> NoReturn:
     """Check filenames to use single preferred suffix over other possible variants."""
-    mapping_dict = _parse_mapping(mapping)
+    mapping_dict = _parse_mapping(mapping + extend_mapping)
     print("📝 Mapping of suffixes to preferred suffix:")
     _print_mapping(mapping_dict)
 
