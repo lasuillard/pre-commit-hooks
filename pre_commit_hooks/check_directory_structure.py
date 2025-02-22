@@ -44,11 +44,11 @@ def check_directory_structure(  # noqa: D103, PLR0913
         pair_name = transform(file, source=source, target=target)
         pair = target.joinpath(file.relative_to(source)).with_name(pair_name)
         if not pair.exists():
-            print(f"❗ Expecting [yellow]{pair!s}[/yellow] to exist for [yellow]{file!s}[/yellow] but not exists")
+            print(f"❗ Expecting [yellow]{pair!s}[/yellow] to exist for [yellow]{file!s}[/yellow] but not exists.")
             missing_pairs.append(pair)
 
     if missing_pairs:
-        print(f"❌ Found {len(missing_pairs)} missing pair(s)")
+        print(f"❌ Found {len(missing_pairs)} missing pair(s).")
         if create_if_not_exists:
             for pair in missing_pairs:
                 if not dry_run:
@@ -56,7 +56,7 @@ def check_directory_structure(  # noqa: D103, PLR0913
                     pair.touch()
 
                 # ? Space after this emoji is too narrow, so gave 2 spaces; is it happening in my terminal only?
-                print(f"⚠️  Created [green]{pair!s}[/green]")
+                print(f"⚠️  Created [yellow]{pair!s}[/yellow].")
 
         return ExitCode.Error
 
