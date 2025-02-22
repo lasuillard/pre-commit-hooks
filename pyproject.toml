@@ -12,7 +12,7 @@ check-directory-structure = "pre_commit_hooks.check_directory_structure:main"
 preferred-suffix = "pre_commit_hooks.preferred_suffix:main"
 
 [project.optional-dependencies]
-dev = ["mypy~=1.14.1", "ruff~=0.8.1"]
+dev = ["mypy~=1.14.1", "ruff~=0.9.4"]
 test = [
   "coverage~=7.6.0",
   "pytest~=8.3.2",
