@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 # List of glob patterns to exclude from check
 _exclude_base = [
-    "**/__init__.py",
+    "**/__*.py",
 ]
 
 
@@ -91,7 +91,10 @@ def main() -> int:  # noqa: D103
         "--extend-exclude",
         type=str,
         nargs="*",
-        default=[],
+        default=[
+            "**/_*.py",
+            "**/conftest.py",
+        ],
         help="Additional glob patterns to exclude from check",
     )
     parser.add_argument(
