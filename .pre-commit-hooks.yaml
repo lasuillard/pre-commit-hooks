@@ -6,6 +6,36 @@
   pass_filenames: false
   types: [python]
 
+- id: source-matching-test
+  name: Check Python source has matching test
+  description: Check Python source (`src/`) file has matching test file in (`tests/`) directory.
+  entry: check-directory-structure
+  language: python
+  pass_filenames: false
+  types: [python]
+  args:
+    - --source
+    - src
+    - --target
+    - tests
+    - --format
+    - "test_{file.stem}{file.suffix}"
+
+- id: test-matching-source
+  name: Check Python test has matching source
+  description: Check Python test (`tests/`) file has matching source file in (`src/`) directory.
+  entry: check-directory-structure
+  language: python
+  pass_filenames: false
+  types: [python]
+  args:
+    - --source
+    - tests
+    - --target
+    - src
+    - --eval
+    - 'file.stem.removeprefix("test_") + file.suffix'
+
 - id: preferred-suffix
   name: Check filename has preferred suffix
   description: Check filenames to use single preferred suffix over other possible variants.
