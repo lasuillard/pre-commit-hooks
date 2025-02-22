@@ -29,6 +29,7 @@ def check_directory_structure(  # noqa: D103
     target: Path,
     transform: Transform,
     extend_exclude: Iterable[str],
+    create_if_not_exists: bool,
 ) -> int:
     exit_code = 0
     py_files = set(source.glob("**/*.py"))
@@ -47,6 +48,11 @@ def check_directory_structure(  # noqa: D103
                 mirror,
                 file,
             )
+            if create_if_not_exists:
+                mirror.parent.mkdir(parents=True, exist_ok=True)
+                mirror.touch()
+                logger.info("Created %s", mirror)
+
             exit_code = 1
 
     return exit_code
@@ -88,6 +94,12 @@ def main() -> int:  # noqa: D103
         default=[],
         help="Additional glob patterns to exclude from check",
     )
+    parser.add_argument(
+        "--create-if-not-exists",
+        action="store_true",
+        default=False,
+        help="Create expected file if not exists",
+    )
 
     args = parser.parse_args()
     source: Path = args.source
@@ -95,6 +107,7 @@ def main() -> int:  # noqa: D103
     format_: str = args.format
     eval_: str = args.eval
     extend_exclude: list[str] = args.extend_exclude
+    create_if_not_exists: bool = args.create_if_not_exists
 
     if format_ and eval_:
         msg = "Cannot use `--format` and `--eval` together"
@@ -125,6 +138,7 @@ def main() -> int:  # noqa: D103
         target=target,
         transform=transform,
         extend_exclude=extend_exclude,
+        create_if_not_exists=create_if_not_exists,
     )
 
 
