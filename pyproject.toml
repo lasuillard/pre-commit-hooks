@@ -9,7 +9,7 @@ dependencies = ["colorlog~=6.9.0", "typer>=0.15.1"]
 
 [project.scripts]
 check-directory-structure = "pre_commit_hooks.check_directory_structure:entrypoint"
-preferred-suffix = "pre_commit_hooks.preferred_suffix:main"
+preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
 [project.optional-dependencies]
 dev = ["mypy~=1.14.1", "ruff~=0.9.4"]
