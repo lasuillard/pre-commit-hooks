@@ -11,7 +11,7 @@ Personal pre-commit hooks to handle grunt tasks.
 
 See [.pre-commit-hooks-.yaml](./.pre-commit-hooks.yaml) file for available hooks.
 
-### check-directory-structure
+### check-file-pair
 
 Check file in source directory have its pair in target directory.
 

@@ -8,7 +8,7 @@ requires-python = ">=3.9, <4.0"
 dependencies = ["typer>=0.15.1"]
 
 [project.scripts]
-check-directory-structure = "pre_commit_hooks.check_directory_structure:entrypoint"
+check-file-pair = "pre_commit_hooks.check_file_pair:entrypoint"
 preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
 [project.optional-dependencies]

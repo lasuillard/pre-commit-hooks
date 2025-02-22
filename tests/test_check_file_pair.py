@@ -2,7 +2,7 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
-from pre_commit_hooks.check_directory_structure import app
+from pre_commit_hooks.check_file_pair import app
 from tests._helpers import populate_dir
 
 runner = CliRunner()

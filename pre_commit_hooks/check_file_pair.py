@@ -26,7 +26,7 @@ class Transform(Protocol):  # noqa: D101 # pragma: no cover
     def __call__(self, file: Path, *, source: Path, target: Path) -> str: ...  # noqa: D102
 
 
-def check_directory_structure(  # noqa: D103, PLR0913
+def check_file_pair(  # noqa: D103, PLR0913
     *,
     source: Path,
     target: Path,
@@ -129,7 +129,7 @@ def main(  # noqa: PLR0913
         msg = "Either `--format` or `--eval` must be provided"
         raise ValueError(msg)
 
-    exit_code = check_directory_structure(
+    exit_code = check_file_pair(
         source=source,
         target=target,
         transform=transform,
