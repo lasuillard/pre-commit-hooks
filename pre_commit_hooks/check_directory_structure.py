@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Protocol
 
 from pre_commit_hooks.helpers.debugger import input_as_args
 from pre_commit_hooks.util.parser_ import ArgumentParser
@@ -19,7 +19,17 @@ _exclude_base = [
 ]
 
 
-def check_directory_structure(*, source: Path, target: Path, format_: str, extend_exclude: Iterable[str]) -> int:  # noqa: D103
+class Transform(Protocol):  # noqa: D101
+    def __call__(self, file: Path, *, source: Path, target: Path) -> str: ...  # noqa: D102
+
+
+def check_directory_structure(  # noqa: D103
+    *,
+    source: Path,
+    target: Path,
+    transform: Transform,
+    extend_exclude: Iterable[str],
+) -> int:
     exit_code = 0
     py_files = set(source.glob("**/*.py"))
     exclude = _exclude_base + list(extend_exclude)
@@ -29,7 +39,7 @@ def check_directory_structure(*, source: Path, target: Path, format_: str, exten
     # NOTE: `Path.walk` available since 3.12
     for file in py_files:
         mirror = target.joinpath(file.relative_to(source)).with_name(
-            format_.format(file=file),
+            transform(file, source=source, target=target),
         )
         if not mirror.exists():
             logger.warning(
@@ -62,8 +72,14 @@ def main() -> int:  # noqa: D103
     parser.add_argument(
         "--format",
         type=str,
-        default="test_{file.stem}{file.suffix}",
-        help="Format string for target file",
+        default=None,  # e.g. "test_{file.stem}{file.suffix}",
+        help="Format string for target file. Cannot be used with `--eval`.",
+    )
+    parser.add_argument(
+        "--eval",
+        type=str,
+        default=None,  # e.g. "file.stem.removeprefix('test_')",
+        help="Format string for target file using `eval()`. Cannot be used with `--format`.",
     )
     parser.add_argument(
         "--extend-exclude",
@@ -77,12 +93,37 @@ def main() -> int:  # noqa: D103
     source: Path = args.source
     target: Path = args.target
     format_: str = args.format
+    eval_: str = args.eval
     extend_exclude: list[str] = args.extend_exclude
+
+    if format_ and eval_:
+        msg = "Cannot use `--format` and `--eval` together"
+        raise ValueError(msg)
+
+    if format_:
+
+        def transform(file: Path, *, source: Path, target: Path) -> str:
+            return format_.format(file=file, source=source, target=target)
+
+    elif eval_:
+
+        def transform(file: Path, *, source: Path, target: Path) -> str:
+            namespace = {
+                "file": file,
+                "source": source,
+                "target": target,
+            }
+            result = eval(eval_, {"__builtins__": None}, namespace)  # noqa: S307
+            return str(result)
+
+    else:
+        msg = "Either `--format` or `--eval` must be provided"
+        raise ValueError(msg)
 
     return check_directory_structure(
         source=source,
         target=target,
-        format_=format_,
+        transform=transform,
         extend_exclude=extend_exclude,
     )
 

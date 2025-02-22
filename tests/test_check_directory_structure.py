@@ -16,6 +16,8 @@ def test_empty_dir(temp_git_dir: Path) -> None:
             str(temp_git_dir / "src"),
             "--target",
             str(temp_git_dir / "tests"),
+            "--format",
+            "test_{file.stem}{file.suffix}",
         ],
     ):
         exit_code = main()
@@ -45,6 +47,8 @@ def test_only_src_dir_populated(temp_git_dir: Path) -> None:
             str(temp_git_dir / "src"),
             "--target",
             str(temp_git_dir / "tests"),
+            "--format",
+            "test_{file.stem}{file.suffix}",
         ],
     ):
         exit_code = main()
@@ -80,6 +84,8 @@ def test_dir_fully_populated(temp_git_dir: Path) -> None:
             str(temp_git_dir / "src"),
             "--target",
             str(temp_git_dir / "tests"),
+            "--format",
+            "test_{file.stem}{file.suffix}",
             "--extend-exclude",
             "**/migrations/*.py",
         ],
