@@ -19,7 +19,7 @@ _exclude_base = [
 ]
 
 
-def check_directory_structure(*, source: Path, target: Path, extend_exclude: Iterable[str]) -> int:  # noqa: D103
+def check_directory_structure(*, source: Path, target: Path, format_: str, extend_exclude: Iterable[str]) -> int:  # noqa: D103
     exit_code = 0
     py_files = set(source.glob("**/*.py"))
     exclude = _exclude_base + list(extend_exclude)
@@ -29,7 +29,7 @@ def check_directory_structure(*, source: Path, target: Path, extend_exclude: Ite
     # NOTE: `Path.walk` available since 3.12
     for file in py_files:
         mirror = target.joinpath(file.relative_to(source)).with_name(
-            f"test_{file.stem}{file.suffix}",
+            format_.format(file=file),
         )
         if not mirror.exists():
             logger.warning(
@@ -60,6 +60,12 @@ def main() -> int:  # noqa: D103
         help="Target directory",
     )
     parser.add_argument(
+        "--format",
+        type=str,
+        default="test_{file.stem}{file.suffix}",
+        help="Format string for target file",
+    )
+    parser.add_argument(
         "--extend-exclude",
         type=str,
         nargs="*",
@@ -70,11 +76,13 @@ def main() -> int:  # noqa: D103
     args = parser.parse_args()
     source: Path = args.source
     target: Path = args.target
+    format_: str = args.format
     extend_exclude: list[str] = args.extend_exclude
 
     return check_directory_structure(
         source=source,
         target=target,
+        format_=format_,
         extend_exclude=extend_exclude,
     )
 
