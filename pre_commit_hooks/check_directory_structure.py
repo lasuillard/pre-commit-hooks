@@ -66,13 +66,11 @@ def main() -> int:  # noqa: D103
     parser.add_argument(
         "--source",
         type=Path,
-        default=Path.cwd() / "src",
         help="Source directory",
     )
     parser.add_argument(
         "--target",
         type=Path,
-        default=Path.cwd() / "tests",
         help="Target directory",
     )
     parser.add_argument(
