@@ -7,6 +7,23 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
 
+  - repo: https://github.com/lasuillard/pre-commit-hooks
+    rev: v0.4.1
+    hooks:
+      - id: source-matching-test
+        args:
+          - --source
+          - pre_commit_hooks
+          - --create-if-not-exists
+          - --extend-exclude
+          - "utils/debugger.py"
+      - id: test-matching-source
+        args:
+          - --target
+          - pre_commit_hooks
+      - id: preferred-suffix
+        args: [--rename]
+
   - repo: local
     hooks:
       - id: ruff-check

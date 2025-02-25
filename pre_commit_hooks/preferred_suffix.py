@@ -9,7 +9,7 @@ import typer
 from rich import print  # noqa: A004
 from rich.table import Table
 
-from pre_commit_hooks.helpers.debugger import input_as_args
+from pre_commit_hooks.utils.debugger import input_as_args
 
 app = typer.Typer()
 

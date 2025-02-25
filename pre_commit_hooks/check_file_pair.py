@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, NoReturn, Optional, Protocol
 import typer
 from rich import print  # noqa: A004
 
-from pre_commit_hooks.helpers.debugger import input_as_args
+from pre_commit_hooks.utils.debugger import input_as_args
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
