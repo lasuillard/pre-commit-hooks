@@ -16,7 +16,7 @@ repos:
           - pre_commit_hooks
           - --create-if-not-exists
           - --extend-exclude
-          - "utils/debugger.py"
+          - utils/debugger.py
       - id: test-matching-source
         args:
           - --target
