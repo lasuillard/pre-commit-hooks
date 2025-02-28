@@ -56,7 +56,7 @@ def check_file_pair(  # noqa: D103, PLR0913
                     pair.touch()
 
                 # ? Space after this emoji is too narrow, so gave 2 spaces; is it happening in my terminal only?
-                print(f"⚠️  Created [yellow]{pair!s}[/yellow].")
+                print(f"⚠️ Created [yellow]{pair!s}[/yellow].")
 
         return ExitCode.Error
 

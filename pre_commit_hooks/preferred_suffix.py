@@ -38,7 +38,7 @@ def preferred_suffix(*files: Path, mapping: dict[str, str], rename: bool, dry_ru
                 if not dry_run:
                     file.rename(file_renamed)
 
-                print(f"⚠️  Renamed file [yellow]{file!s}[/yellow] to [yellow]{file_renamed!s}[/yellow].")
+                print(f"⚠️ Renamed file [yellow]{file!s}[/yellow] to [yellow]{file_renamed!s}[/yellow].")
 
         return ExitCode.Error
 
