@@ -1,4 +1,4 @@
-# flake8: noqa: B008
+# flake8: noqa: B008, UP045
 from __future__ import annotations
 
 from enum import Enum
