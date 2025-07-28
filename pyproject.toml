@@ -11,7 +11,7 @@ dependencies = ["typer>=0.15.1"]
 check-file-pair = "pre_commit_hooks.check_file_pair:entrypoint"
 preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["mypy~=1.16.0", "ruff~=0.12.1"]
 test = [
   "coverage~=7.9.1",
@@ -27,6 +27,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["pre_commit_hooks"]
+
+[tool.uv]
+default-groups = ["dev", "test"]
 
 [tool.ruff]
 target-version = "py39"

@@ -230,7 +230,7 @@ dependencies = [
     { name = "typer" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "mypy" },
     { name = "ruff" },
@@ -244,17 +244,20 @@ test = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "coverage", marker = "extra == 'test'", specifier = "~=7.9.1" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = "~=1.16.0" },
-    { name = "pytest", marker = "extra == 'test'", specifier = "~=8.4.1" },
-    { name = "pytest-cov", marker = "extra == 'test'", specifier = "~=6.2.1" },
-    { name = "pytest-env", marker = "extra == 'test'", specifier = "~=1.1.1" },
-    { name = "pytest-sugar", marker = "extra == 'test'", specifier = "~=1.0.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "~=0.12.1" },
-    { name = "typer", specifier = ">=0.15.1" },
+requires-dist = [{ name = "typer", specifier = ">=0.15.1" }]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = "~=1.16.0" },
+    { name = "ruff", specifier = "~=0.12.1" },
 ]
-provides-extras = ["dev", "test"]
+test = [
+    { name = "coverage", specifier = "~=7.9.1" },
+    { name = "pytest", specifier = "~=8.4.1" },
+    { name = "pytest-cov", specifier = "~=6.2.1" },
+    { name = "pytest-env", specifier = "~=1.1.1" },
+    { name = "pytest-sugar", specifier = "~=1.0.0" },
+]
 
 [[package]]
 name = "pygments"
