@@ -16,7 +16,7 @@ dev = ["mypy~=1.17.1", "ruff~=0.14.3"]
 test = [
   "coverage~=7.10.6",
   "pytest~=8.4.1",
-  "pytest-cov~=6.2.1",
+  "pytest-cov~=7.0.0",
   "pytest-env~=1.1.1",
   "pytest-sugar~=1.1.1",
 ]
