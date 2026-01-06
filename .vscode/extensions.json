@@ -8,7 +8,6 @@
     "editorconfig.editorconfig",
     "charliermarsh.ruff",
     "ms-python.mypy-type-checker",
-    "njpwerner.autodocstring",
     "ms-python.debugpy"
   ]
 }
