@@ -1,11 +1,3 @@
-- id: check-file-pair
-  name: Check file pair
-  description: Check file in source directory have its pair in target directory.
-  language: python
-  pass_filenames: false
-  types: [python]
-  entry: check-file-pair
-
 - id: preferred-suffix
   name: Check filename has preferred suffix
   description: Check filenames to use single preferred suffix over other possible variants.
