@@ -1,6 +1,6 @@
 {
   "name": "lasuillard/pre-commit-hooks",
-  "image": "mcr.microsoft.com/devcontainers/python:3.10-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm",
   "features": {},
   "onCreateCommand": "./.devcontainer/onCreateCommand.sh",
   "postStartCommand": "./.devcontainer/postStartCommand.sh",
