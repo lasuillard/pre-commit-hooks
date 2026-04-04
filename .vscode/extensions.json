@@ -2,9 +2,6 @@
   "recommendations": [
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "redhat.vscode-yaml",
-    "tamasfe.even-better-toml",
-    "streetsidesoftware.code-spell-checker",
     "editorconfig.editorconfig",
     "charliermarsh.ruff",
     "ms-python.mypy-type-checker",

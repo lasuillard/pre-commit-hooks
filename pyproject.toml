@@ -4,7 +4,7 @@ description = "pre-commit hooks for personal use."
 version = "0.4.3"
 authors = [{ name = "Yuchan Lee", email = "lasuillard@gmail.com" }]
 license = "MIT"
-requires-python = ">=3.9, <4.0"
+requires-python = ">=3.10, <4.0"
 dependencies = ["typer>=0.15.1"]
 
 [project.scripts]
@@ -14,7 +14,7 @@ preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 dev = ["mypy~=1.20.0", "ruff~=0.15.9"]
 test = [
   "coverage~=7.13.5",
-  "pytest~=8.4.1",
+  "pytest~=9.0.2",
   "pytest-cov~=7.1.0",
   "pytest-env~=1.6.0",
   "pytest-sugar~=1.1.1",
@@ -31,7 +31,6 @@ packages = ["pre_commit_hooks"]
 default-groups = ["dev", "test"]
 
 [tool.ruff]
-target-version = "py39"
 line-length = 120
 
 [tool.ruff.lint]
@@ -56,7 +55,6 @@ ignore = [
 convention = "google"
 
 [tool.mypy]
-python_version = "3.9"
 exclude = ['^\.venv/*']
 namespace_packages = true
 check_untyped_defs = true

@@ -2,5 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>lasuillard/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "groupName": "Python",
+      "matchPackageNames": [
+        "python",
+        "mcr.microsoft.com/devcontainers/python"
+      ]
+    }
   ]
 }
