@@ -6,6 +6,7 @@
   "packageRules": [
     {
       "groupName": "Python",
+      "matchUpdateTypes": ["major", "minor", "patch"],
       "matchPackageNames": [
         "python",
         "mcr.microsoft.com/devcontainers/python"
