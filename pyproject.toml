@@ -11,13 +11,14 @@ dependencies = ["typer>=0.15.1"]
 preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
 [dependency-groups]
-dev = ["mypy~=2.1.0", "ruff~=0.15.9"]
-test = [
-  "coverage~=7.13.5",
-  "pytest~=9.0.2",
-  "pytest-cov~=7.1.0",
-  "pytest-env~=1.6.0",
-  "pytest-sugar~=1.1.1",
+dev = [
+  "mypy==2.1.0",
+  "ruff==0.15.15",
+  "coverage==7.14.0",
+  "pytest==9.0.3",
+  "pytest-cov==7.1.0",
+  "pytest-env==1.6.0",
+  "pytest-sugar==1.1.1",
 ]
 
 [build-system]
@@ -26,9 +27,6 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["pre_commit_hooks"]
-
-[tool.uv]
-default-groups = ["dev", "test"]
 
 [tool.ruff]
 line-length = 120
