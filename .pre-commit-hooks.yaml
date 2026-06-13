@@ -1,5 +1,5 @@
 - id: preferred-suffix
-  name: Check filename has preferred suffix
+  name: preferred-suffix
   description: Check filenames to use single preferred suffix over other possible variants.
   language: python
   pass_filenames: true
@@ -7,8 +7,8 @@
   entry: preferred-suffix
 
 - id: alloy-format
-  name: Format `.alloy` files
-  description: Format `.alloy` files using `alloy fmt`. `alloy` must be installed.
+  name: alloy-format
+  description: Format `.alloy` files using `alloy fmt`. `alloy` is required and will not be installed by this hook.
   language: system
   files: \.alloy$
   entry: alloy fmt

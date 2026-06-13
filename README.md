@@ -10,13 +10,56 @@ Personal pre-commit hooks to handle grunt tasks.
 
 See [.pre-commit-hooks-.yaml](./.pre-commit-hooks.yaml) file for available hooks.
 
-### preferred-suffix
+Example `.pre-commit-config.yaml` would look like:
 
-Check file has preferred suffix if there are multiple available suffixes.
+```yaml
+repos:
+  ...
 
-### alloy-format
+  - repo: https://github.com/lasuillard/pre-commit-hooks
+    rev: v0.4.3
+    hooks:
+      - id: alloy-format
 
-> [!IMPORTANT]
+  ...
+```
+
+### `preferred-suffix`
+
+Check file has preferred suffix if there are multiple available suffixes (`TYPER_USE_RICH=0 uv run preferred-suffix --help`).
+
+```bash
+$ TYPER_USE_RICH=0 uv run preferred-suffix --help
+Usage: preferred-suffix [OPTIONS] FILES...
+
+  Check filenames to use single preferred suffix over other possible variants.
+
+Arguments:
+  FILES...  Files to check.  [required]
+
+Options:
+  --mapping TEXT            List of suffix mapping, each in format of
+                            `suffix1,suffix2,... -> preferred-suffix`.
+                            [default: yml -> yaml]
+  --extend-mapping TEXT     List of suffix mapping to extend the default
+                            mapping.
+  --rename / --no-rename    Whether to rename files with preferred suffix
+                            automatically.  [default: no-rename]
+  --dry-run / --no-dry-run  Skip some operations to prevent changes.
+                            [default: no-dry-run]
+  --install-completion      Install completion for the current shell.
+  --show-completion         Show completion for the current shell, to copy it
+                            or customize the installation.
+  --help                    Show this message and exit.
+```
+
+### `alloy-format`
+
+> [!NOTE]
 > This hook is just a convenience shortcut to invoke [Alloy](https://github.com/grafana/alloy) CLI. It does **NOT** install `alloy`.
 
-Reformat `.alloy` files using `alloy fmt`.
+Reformat `.alloy` files using `alloy fmt`. See `alloy fmt --help` for available options.
+
+## 🧑‍💻 Development
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) file for development instructions.

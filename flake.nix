@@ -19,12 +19,14 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             git
-            gnumake
+            just
             pre-commit
             uv
+            # For developing pre-commit hooks
+            grafana-alloy
           ];
           shellHook = ''
-
+            pre-commit install
           '';
         };
       }
