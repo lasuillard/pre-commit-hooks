@@ -26,7 +26,7 @@ repos:
 
 ### `preferred-suffix`
 
-Check file has preferred suffix if there are multiple available suffixes (`TYPER_USE_RICH=0 uv run preferred-suffix --help`).
+Check file has preferred suffix if there are multiple available suffixes.
 
 ```bash
 $ TYPER_USE_RICH=0 uv run preferred-suffix --help
