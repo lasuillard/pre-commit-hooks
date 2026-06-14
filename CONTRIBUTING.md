@@ -15,7 +15,6 @@ This project uses the following tech stack:
 
 - `.devcontainer.example/`: Development environment configuration
 - `.vscode.example/`: Project-specific VS Code configuration example
-- `packages/`: Shared packages
 - `pre_commit_hooks/`: This project source code
 - `flake.lock`, `flake.nix`: Flake configuration for development environment
 - `Justfile`: Commands for development
