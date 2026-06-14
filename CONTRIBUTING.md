@@ -17,7 +17,6 @@ This project uses the following tech stack:
 - `.vscode.example/`: Project-specific VS Code configuration example
 - `packages/`: Shared packages
 - `pre_commit_hooks/`: This project source code
-- `.env.example`: Example environment variables for development
 - `flake.lock`, `flake.nix`: Flake configuration for development environment
 - `Justfile`: Commands for development
 - `pyproject.toml`: Project dependencies and configuration
