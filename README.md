@@ -8,9 +8,9 @@ Personal pre-commit hooks to handle grunt tasks.
 
 ## 🪝 Available hooks
 
-See [.pre-commit-hooks-.yaml](./.pre-commit-hooks.yaml) file for available hooks.
+See the [.pre-commit-hooks.yaml](./.pre-commit-hooks.yaml) file for available hooks.
 
-Example `.pre-commit-config.yaml` would look like:
+An example `.pre-commit-config.yaml` would look like:
 
 ```yaml
 repos:
@@ -26,24 +26,24 @@ repos:
 
 ### `preferred-suffix`
 
-Check file has preferred suffix if there are multiple available suffixes.
+Checks whether a file uses the preferred suffix when multiple variants are available.
 
 ```bash
 $ TYPER_USE_RICH=0 uv run preferred-suffix --help
 Usage: preferred-suffix [OPTIONS] FILES...
 
-  Check filenames to use single preferred suffix over other possible variants.
+  Check filenames to use a single preferred suffix over other possible variants.
 
 Arguments:
   FILES...  Files to check.  [required]
 
 Options:
-  --mapping TEXT            List of suffix mapping, each in format of
+  --mapping TEXT            List of suffix mappings, each in the format of
                             `suffix1,suffix2,... -> preferred-suffix`.
                             [default: yml -> yaml]
-  --extend-mapping TEXT     List of suffix mapping to extend the default
+  --extend-mapping TEXT     List of suffix mappings to extend the default
                             mapping.
-  --rename / --no-rename    Whether to rename files with preferred suffix
+  --rename / --no-rename    Whether to rename files with the preferred suffix
                             automatically.  [default: no-rename]
   --dry-run / --no-dry-run  Skip some operations to prevent changes.
                             [default: no-dry-run]
@@ -56,10 +56,10 @@ Options:
 ### `alloy-format`
 
 > [!NOTE]
-> This hook is just a convenience shortcut to invoke [Alloy](https://github.com/grafana/alloy) CLI. It does **NOT** install `alloy`.
+> This hook is just a convenience shortcut to invoke the [Alloy](https://github.com/grafana/alloy) CLI. It does **NOT** install `alloy`.
 
-Reformat `.alloy` files using `alloy fmt`. See `alloy fmt --help` for available options.
+Reformats `.alloy` files using `alloy fmt`. See `alloy fmt --help` for available options.
 
 ## 🧑‍💻 Development
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) file for development instructions.
+See the [CONTRIBUTING.md](./CONTRIBUTING.md) file for development instructions.

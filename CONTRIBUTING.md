@@ -1,6 +1,6 @@
-# 👥 Development guide
+# 👥 Development Guide
 
-This project is personal work. Although it's shared public open source, it is not open for contributions. Here, I describe how to develop and test pre-commit hooks locally.
+This project is personal work. Although it's shared as a public open-source project, it is not open for contributions. Here, I describe how to develop and test pre-commit hooks locally.
 
 ## 🛠️ Tech stack
 
@@ -26,15 +26,15 @@ For development, you need to have the following tools installed:
 
 ### ❄️ Tools managed via Nix Flakes
 
-This repository uses [Nix Flakes](https://nix.dev/concepts/flakes.html) to manage tools. Following tools will be automatically installed (you need `nix` installed, of course):
+This repository uses [Nix Flakes](https://nix.dev/concepts/flakes.html) to manage tools. The following tools will be automatically installed (you need `nix` installed, of course):
 
 - `git`
 - `pre-commit`
 - `uv`
-- [Just](https://just.systems/) (`just`)
-- Tools that pre-commit hook requires (irrelevant for development): `alloy`
+- [Just](https://just.systems) (`just`)
+- Tools that the pre-commit hook requires (irrelevant for development): `alloy`
 
-If you prefer [Dev Container](https://containers.dev/), we have configuration ([devcontainer.json](./.devcontainer.example/devcontainer.json)) for it, with Nix installed! All you need to do is to run `nix develop` to start the development environment then run `just install` to install dependencies.
+If you prefer using a [Dev Container](https://containers.dev), we have a configuration ([devcontainer.json](./.devcontainer.example/devcontainer.json)) for it with Nix pre-installed! All you need to do is run `nix develop` to start the development environment, then run `just install` to install dependencies.
 
 ## ⌨️ Developing pre-commit hooks
 
@@ -47,9 +47,9 @@ preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
 You can check the source code at [`pre_commit_hooks/preferred_suffix.py`](./pre_commit_hooks/preferred_suffix.py) as an example.
 
-Once you have implemented a hook, you should add a new hook entry in the `pre-commit-hooks.yaml` file as well. Then, you can try the hook as if you are installing it as a pre-commit hook, by running `pre-commit try-repo` command.
+Once you have implemented a hook, you should add a new hook entry in the `pre-commit-hooks.yaml` file as well. Then, you can try the hook as if you are installing it as a pre-commit hook by running the `pre-commit try-repo` command.
 
-Let's take `alloy-format` hook as an example:
+Let's take the `alloy-format` hook as an example:
 
 ```bash
 $ pre-commit try-repo . alloy-format
@@ -72,11 +72,11 @@ alloy-format.........................................(no files to check)Skipped
 
 ## ✅ Verifying changes
 
-Before you push your code, you need to verify your code changes if it follows with the project's coding standard. You can run `just ci` to run all the necessary linters, formatters, and tests. Or, you can leave the `pre-commit` hooks do the job for you.
+Before you push your code, you need to verify whether your code changes follow the project's coding standards. You can run `just ci` to run all the necessary linters, formatters, and tests. Alternatively, you can let the `pre-commit` hooks do the job for you.
 
 ## 🚀 Publishing pre-commit hooks
 
 > [!NOTE]
-> This project is not published to PyPI because pre-commit support Git repositories.
+> This project is not published to PyPI because pre-commit supports Git repositories.
 
-This project is published as a package on GitHub Releases. If you push a tag, it will be automatically create a new release automatically.
+This project is published as a package on GitHub Releases. If you push a tag, it will automatically create a new release.
