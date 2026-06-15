@@ -16,7 +16,8 @@ This project uses the following tech stack:
 - `.devcontainer.example/`: Development environment configuration
 - `.vscode.example/`: Project-specific VS Code configuration example
 - `pre_commit_hooks/`: The project's source code
-- `flake.lock`, `flake.nix`: Flake configuration for the development environment
+- `tests/`: Project tests
+- `flake.nix`: Flake configuration for the development environment
 - `Justfile`: Commands for development
 - `pyproject.toml`: Project dependencies and configuration
 
@@ -30,8 +31,8 @@ This repository uses [Nix Flakes](https://nix.dev/concepts/flakes.html) to manag
 
 - `git`
 - `pre-commit`
+- `just`
 - `uv`
-- [Just](https://just.systems) (`just`)
 - Tools required by the pre-commit hook (not needed for development): `alloy`
 
 Simply run `nix develop` to start the development environment, then run `just install` to install dependencies.

@@ -19,8 +19,8 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             git
-            just
             pre-commit
+            just
             uv
             # For developing pre-commit hooks
             grafana-alloy
