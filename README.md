@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/lasuillard/pre-commit-hooks/graph/badge.svg?token=I646XXfAud)](https://codecov.io/gh/lasuillard/pre-commit-hooks)
 ![GitHub Release](https://img.shields.io/github/v/release/lasuillard/pre-commit-hooks)
 
-Personal pre-commit hooks to handle grunt tasks.
+Personal pre-commit hooks for common developer tasks.
 
 ## 🪝 Available hooks
 
@@ -26,7 +26,7 @@ repos:
 
 ### `preferred-suffix`
 
-Checks whether a file uses the preferred suffix when multiple variants are available.
+Checks whether a file uses the preferred suffix when multiple suffix variants are available.
 
 ```bash
 $ TYPER_USE_RICH=0 uv run preferred-suffix --help
@@ -56,7 +56,7 @@ Options:
 ### `alloy-format`
 
 > [!NOTE]
-> This hook is just a convenience shortcut to invoke the [Alloy](https://github.com/grafana/alloy) CLI. It does **NOT** install `alloy`.
+> This hook is a convenience shortcut for invoking the [Alloy](https://github.com/grafana/alloy) CLI. It does **NOT** install `alloy`.
 
 Reformats `.alloy` files using `alloy fmt`. See `alloy fmt --help` for available options.
 
