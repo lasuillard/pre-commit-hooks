@@ -63,3 +63,7 @@ Reformats `.alloy` files using `alloy fmt`. See `alloy fmt --help` for available
 ## 🧑‍💻 Development
 
 See the [CONTRIBUTING.md](./CONTRIBUTING.md) file for development instructions.
+
+## 📜 License
+
+This project is licensed under the MIT License.
