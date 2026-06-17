@@ -13,8 +13,6 @@ This project uses the following tech stack:
 
 ## 📂 Key directory structure
 
-- `.devcontainer.example/`: Development environment configuration
-- `.vscode.example/`: Project-specific VS Code configuration example
 - `pre_commit_hooks/`: The project's source code
 - `tests/`: Project tests
 - `flake.nix`: Flake configuration for the development environment
