@@ -54,7 +54,7 @@ try hook="preferred-suffix":
 
 # Remove temporary files
 clean:
-    rm -rf \
+    rm --recursive --force \
         .mypy_cache/ \
         .pytest_cache/ \
         .ruff_cache/ \
