@@ -18,11 +18,12 @@ alias up := update
 # =============================================================================
 
 # Run all checks
-ci: lint test
+ci: (format "yes") lint test
 
 # Autoformat code
-format:
-    uv run ruff format .
+[arg("check", long="check", value="yes")]
+format check="no":
+    uv run ruff format {{ if check == "yes" { "--check" } else { "" } }} .
 
 alias fmt := format
 
@@ -46,7 +47,7 @@ build:
 
 # Run pre-commit try-repo for this project hooks
 try hook="preferred-suffix":
-    pre-commit try-repo . {{hook}}
+    pre-commit try-repo . {{ hook }}
 
 # =============================================================================
 # Utility
