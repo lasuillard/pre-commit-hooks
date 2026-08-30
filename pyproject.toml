@@ -12,8 +12,8 @@ preferred-suffix = "pre_commit_hooks.preferred_suffix:entrypoint"
 
 [dependency-groups]
 dev = [
-  "mypy==2.3.0",
-  "ruff==0.16.2",
+  "mypy==2.3.1",
+  "ruff==0.16.3",
   "coverage==7.15.4",
   "pytest==9.1.1",
   "pytest-cov==7.1.0",
