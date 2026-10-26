@@ -27,6 +27,9 @@
           ];
           shellHook = ''
             pre-commit install
+
+            # Prevent pre-commit dependency leakage messing with the environment
+            unset PYTHONPATH
           '';
         };
       }
