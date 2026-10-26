@@ -6,7 +6,7 @@ This is a personal project. Although it is public and open-source, contributions
 
 This project uses the following tech stack:
 
-- [Python](https://www.python.org) 3.10
+- [Python](https://www.python.org) 3.11
 - [uv](https://docs.astral.sh/uv/) for dependency management and packaging
 - [Ruff](https://docs.astral.sh/ruff/) to lint and format Python code, and [mypy](https://mypy-lang.org/) for type checking
 - [pytest](https://docs.pytest.org/en/latest) for testing
