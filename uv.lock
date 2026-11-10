@@ -489,13 +489,13 @@ requires-dist = [{ name = "typer", specifier = ">=0.15.1,<1" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "coverage", specifier = ">=7.17.0,<8" },
-    { name = "mypy", specifier = ">=2.4.0,<3" },
-    { name = "pytest", specifier = ">=9.1.1,<10" },
-    { name = "pytest-cov", specifier = ">=7.1.0,<8" },
-    { name = "pytest-env", specifier = ">=1.8.1,<2" },
-    { name = "pytest-sugar", specifier = ">=1.1.1,<2" },
-    { name = "ruff", specifier = ">=0.17.3,<0.18" },
+    { name = "coverage", specifier = "~=7.17" },
+    { name = "mypy", specifier = "~=2.4" },
+    { name = "pytest", specifier = "~=9.1" },
+    { name = "pytest-cov", specifier = "~=7.1" },
+    { name = "pytest-env", specifier = "~=1.8" },
+    { name = "pytest-sugar", specifier = "~=1.1" },
+    { name = "ruff", specifier = "~=0.17.3" },
 ]
 
 [[package]]
